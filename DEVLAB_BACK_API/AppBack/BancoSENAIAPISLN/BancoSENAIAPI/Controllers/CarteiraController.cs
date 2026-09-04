@@ -1,6 +1,7 @@
 ﻿namespace BancoSENAIAPI.Controllers
 {
-    public class Class
+    public class CarteiraController
     {
+        
     }
 }
