@@ -66,11 +66,11 @@ namespace BancoSENAIAPI.Controllers
         [HttpDelete("{codigo}")]
         public IActionResult Excluir(int codigo)
         {
-            var agencia = _agencias.FirstOrDefault(a => a.NumeroAgencia == codigo);
+            var cliente = _clientes.FirstOrDefault(a => a.CodigoCliente == codigo);
 
-            if (agencia == null) return NotFound();
+            if (cliente == null) return NotFound();
 
-            _agencias.Remove(agencia);
+            _clientes.Remove(cliente);
             return Ok(new { message = "Agência excluída com sucesso." }); // Status 200 [6]
         }
     }
