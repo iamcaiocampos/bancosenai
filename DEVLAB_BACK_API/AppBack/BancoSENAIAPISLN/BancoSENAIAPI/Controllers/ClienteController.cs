@@ -44,14 +44,20 @@ namespace BancoSENAIAPI.Controllers
         }
 
         [HttpPut("{codigo}")]
-        public IActionResult Alterar(int codigo, [FromBody] Agencia agenciaAtualizada)
+        public IActionResult Alterar(int codigo, [FromBody] Cliente clienteAtualizado)
         {
-            var agenciaExistente = .FirstOrDefault(a => a.NumeroAgencia == codigo);
+            var clienteExistente = _clientes.FirstOrDefault(a => a.CodigoCliente == codigo);
 
-            if (agenciaExistente == null) return NotFound();
+            if (clienteExistente == null) return NotFound();
 
-            agenciaExistente.Cidade = agenciaAtualizada.Cidade;
-            agenciaExistente.SiglaEstado = agenciaAtualizada.SiglaEstado;
+            clienteExistente.NomeCliente = clienteAtualizado.NomeCliente;
+            clienteExistente.CPF = clienteAtualizado.CPF;
+            clienteExistente.NumeroAgencia = clienteAtualizado.NumeroAgencia;
+            clienteExistente.SaldoTotal = clienteAtualizado.SaldoTotal;
+            clienteExistente.Sexo = clienteAtualizado.Sexo;
+            clienteExistente.Endereco = clienteAtualizado.Endereco;
+            clienteExistente.Cidade = clienteAtualizado.Cidade;
+            clienteExistente.Estado = clienteAtualizado.Estado;
 
             // Retorna Status 204 No Content para atualizações bem-sucedidas [6, 9]
             return NoContent();
