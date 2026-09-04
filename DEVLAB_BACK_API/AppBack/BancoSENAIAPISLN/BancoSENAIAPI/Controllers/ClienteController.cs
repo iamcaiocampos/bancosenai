@@ -21,32 +21,32 @@ namespace BancoSENAIAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Cadastrar([FromBody] Agencia novaAgencia)
+        public IActionResult Cadastrar([FromBody] Cliente novoCliente)
         {
 
-            if (_agencias.Any(a => a.NumeroAgencia == novaAgencia.NumeroAgencia))
+            if (_clientes.Any(a => a.CodigoCliente == novoCliente.CodigoCliente))
                 return BadRequest(new { message = "Este número de agência já existe." });
 
-            _agencias.Add(novaAgencia);
+            _clientes.Add(novoCliente);
             // Retorna Status 201 Created conforme boas práticas REST [6, 8]
-            return Created("", novaAgencia);
+            return Created("", novoCliente);
         }
 
         [HttpGet("{codigo}")]
         public IActionResult ConsultarPorCodigo(int codigo)
         {
-            var agencia = _agencias.FirstOrDefault(a => a.NumeroAgencia == codigo);
+            var cliente = _clientes.FirstOrDefault(a => a.CodigoCliente == codigo);
 
-            if (agencia == null)
-                return NotFound(new { message = "Agência não encontrada." }); // Status 404 [6, 7]
+            if (cliente == null)
+                return NotFound(new { message = "Cliente não encontrado." }); // Status 404 [6, 7]
 
-            return Ok(agencia); // Status 200 OK [6, 7]
+            return Ok(cliente); // Status 200 OK [6, 7]
         }
 
         [HttpPut("{codigo}")]
         public IActionResult Alterar(int codigo, [FromBody] Agencia agenciaAtualizada)
         {
-            var agenciaExistente = _agencias.FirstOrDefault(a => a.NumeroAgencia == codigo);
+            var agenciaExistente = .FirstOrDefault(a => a.NumeroAgencia == codigo);
 
             if (agenciaExistente == null) return NotFound();
 
