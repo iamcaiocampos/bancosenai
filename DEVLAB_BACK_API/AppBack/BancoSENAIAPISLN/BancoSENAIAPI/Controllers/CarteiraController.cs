@@ -65,7 +65,7 @@ namespace BancoSENAIAPI.Controllers
             if (carteira == null) return NotFound();
 
             _carteira.Remove(carteira);
-            return Ok(new { message = "Agência excluída com sucesso." }); // Status 200 [6]
+            return Ok(new { message = "Carteira excluída com sucesso." }); // Status 200 [6]
         }
     }
 }
