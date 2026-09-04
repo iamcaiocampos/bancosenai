@@ -44,14 +44,14 @@ namespace BancoSENAIAPI.Controllers
         }
 
         [HttpPut("{codigo}")]
-        public IActionResult Alterar(int codigo, [FromBody] Agencia agenciaAtualizada)
+        public IActionResult Alterar(int codigo, [FromBody] Carteira carteiraAtualizada)
         {
-            var agenciaExistente = _carteira.FirstOrDefault(a => a.NumeroAgencia == codigo);
+            var carteiraExistente = _carteira.FirstOrDefault(a => a.NumeroCarteira == codigo);
 
-            if (agenciaExistente == null) return NotFound();
+            if (carteiraAtualizada == null) return NotFound();
 
-            agenciaExistente.Cidade = agenciaAtualizada.Cidade;
-            agenciaExistente.SiglaEstado = agenciaAtualizada.SiglaEstado;
+            carteiraExistente.ApetiteCarteira = carteiraAtualizada.ApetiteCarteira;
+            carteiraExistente.NomeCarteira = carteiraAtualizada.NomeCarteira;
 
             // Retorna Status 204 No Content para atualizações bem-sucedidas [6, 9]
             return NoContent();
