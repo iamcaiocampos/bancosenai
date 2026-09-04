@@ -35,12 +35,12 @@ namespace BancoSENAIAPI.Controllers
         [HttpGet("{codigo}")]
         public IActionResult ConsultarPorCodigo(int codigo)
         {
-            var agencia = _carteira.FirstOrDefault(a => a.NumeroAgencia == codigo);
+            var carteira = _carteira.FirstOrDefault(a => a.NumeroCarteira == codigo);
 
-            if (agencia == null)
-                return NotFound(new { message = "Agência não encontrada." }); // Status 404 [6, 7]
+            if (carteira == null)
+                return NotFound(new { message = "Carteira não encontrada." }); // Status 404 [6, 7]
 
-            return Ok(agencia); // Status 200 OK [6, 7]
+            return Ok(carteira); // Status 200 OK [6, 7]
         }
 
         [HttpPut("{codigo}")]
