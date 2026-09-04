@@ -9,15 +9,15 @@ namespace BancoSENAIAPI.Controllers
     {
         private static List<Cliente> _clientes = new List<Cliente>
         {
-            new Agencia { NumeroAgencia = 1001, Cidade = "Aracaju", SiglaEstado = "SE" },
-            new Agencia { NumeroAgencia = 2002, Cidade = "São Paulo", SiglaEstado = "SP" },
-            new Agencia { NumeroAgencia = 3003, Cidade = "Salvador", SiglaEstado = "BA" }
+            new Cliente { CodigoCliente = 1, NomeCliente = "Felipe Gustavo", CPF = "123.456.789-00", NumeroAgencia = 10, SaldoTotal = 0, Sexo = "M", Endereco = "Rua A, 123", Cidade = "Aracaju", Estado = "SE" },
+            new Cliente { CodigoCliente = 2, NomeCliente = "Paulo Eduardo", CPF = "987.654.321-11", NumeroAgencia = 10, SaldoTotal = 0, Sexo = "F", Endereco = "Av. B, 456", Cidade = "São Paulo", Estado = "SP" },
+            new Cliente { CodigoCliente = 3, NomeCliente = "Lucas vinícius", CPF = "456.789.123-22", NumeroAgencia = 10, SaldoTotal = 0, Sexo = "M", Endereco = "Rua C, 789", Cidade = "Salvador", Estado = "BA" }
         };
 
         [HttpGet]
         public IActionResult ListarTodas()
         {
-            return Ok(_agencias);
+            return Ok(_clientes);
         }
 
         [HttpPost]

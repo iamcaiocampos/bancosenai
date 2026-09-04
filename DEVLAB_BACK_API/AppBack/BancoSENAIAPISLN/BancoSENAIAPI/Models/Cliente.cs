@@ -8,7 +8,7 @@
 
         public string CPF { get; set; }
 
-        public int NumeroDaAgencia { get; set; }
+        public int NumeroAgencia { get; set; }
 
         public decimal SaldoTotal { get; set; }
 
