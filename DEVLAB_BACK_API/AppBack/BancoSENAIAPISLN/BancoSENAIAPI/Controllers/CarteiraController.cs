@@ -21,21 +21,21 @@ namespace BancoSENAIAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Cadastrar([FromBody] Agencia novaAgencia)
+        public IActionResult Cadastrar([FromBody] Carteira novaCarteira)
         {
 
-            if (_agencias.Any(a => a.NumeroAgencia == novaAgencia.NumeroAgencia))
-                return BadRequest(new { message = "Este número de agência já existe." });
+            if (_carteira.Any(a => a.NumeroCarteira == novaCarteira.NumeroCarteira))
+                return BadRequest(new { message = "Este número de carteira já existe." });
 
-            _agencias.Add(novaAgencia);
+            _carteira.Add(novaCarteira);
             // Retorna Status 201 Created conforme boas práticas REST [6, 8]
-            return Created("", novaAgencia);
+            return Created("", novaCarteira);
         }
 
         [HttpGet("{codigo}")]
         public IActionResult ConsultarPorCodigo(int codigo)
         {
-            var agencia = _agencias.FirstOrDefault(a => a.NumeroAgencia == codigo);
+            var agencia = _carteira.FirstOrDefault(a => a.NumeroAgencia == codigo);
 
             if (agencia == null)
                 return NotFound(new { message = "Agência não encontrada." }); // Status 404 [6, 7]
@@ -46,7 +46,7 @@ namespace BancoSENAIAPI.Controllers
         [HttpPut("{codigo}")]
         public IActionResult Alterar(int codigo, [FromBody] Agencia agenciaAtualizada)
         {
-            var agenciaExistente = _agencias.FirstOrDefault(a => a.NumeroAgencia == codigo);
+            var agenciaExistente = _carteira.FirstOrDefault(a => a.NumeroAgencia == codigo);
 
             if (agenciaExistente == null) return NotFound();
 
@@ -60,11 +60,11 @@ namespace BancoSENAIAPI.Controllers
         [HttpDelete("{codigo}")]
         public IActionResult Excluir(int codigo)
         {
-            var agencia = _agencias.FirstOrDefault(a => a.NumeroAgencia == codigo);
+            var agencia = _carteira.FirstOrDefault(a => a.NumeroAgencia == codigo);
 
             if (agencia == null) return NotFound();
 
-            _agencias.Remove(agencia);
+            _carteira.Remove(agencia);
             return Ok(new { message = "Agência excluída com sucesso." }); // Status 200 [6]
         }
     }
