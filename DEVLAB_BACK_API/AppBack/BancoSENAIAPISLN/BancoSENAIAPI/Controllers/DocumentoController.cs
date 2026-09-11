@@ -14,7 +14,7 @@ namespace BancoSENAIAPI.Controllers
         private static int _nextId = 1;
 
         [HttpPost("upload/{codigoCliente}")]
-        public async Task<IActionResult> AnexarArquivo(int codigoCliente, IFormFile arquivo )
+        public async Task<IActionResult> AnexarArquivo(int codigoCliente, IFormFile arquivo)
         {
             if (arquivo == null || arquivo.Length == 0)
             {
@@ -31,12 +31,25 @@ namespace BancoSENAIAPI.Controllers
             string extensao = Path.GetExtension(arquivo.FileName);
             string nomeOriginal = Path.GetFileName(arquivo.FileName);
             string novoNome = $"{codigoCliente}_{nomeOriginal}_{Guid.NewGuid()}{extensao}";
-            string caminhoFinal = Path.Combine(pastaCliente, novoNome); 
+            string caminhoFinal = Path.Combine(pastaCliente, novoNome);
 
             using (var stream = new FileStream(caminhoFinal, FileMode.Create))
             {
                 await arquivo.CopyToAsync(stream);
             }
+
+            var documentometadados = new Models.documentometadados()
+            {
+                Id = _nextId++,
+                Name = nomeOriginal,
+                Extensao = extensao,
+                Caminho = caminhoFinal,
+                CodigoCliente = codigoCliente,
+            };
+
+            _documentometadados.Add(documentometadados);
+
+            return Ok(new { mensagem = "documento anexado com sucesso", arquivoSalvo = novoNome });
         }
     }
 }
