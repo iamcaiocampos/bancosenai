@@ -27,6 +27,11 @@ namespace BancoSENAIAPI.Controllers
             {
                 Directory.CreateDirectory(pastaCliente);
             }
+
+            string extensao = Path.GetExtension(arquivo.FileName);
+            string nomeOriginal = Path.GetFileName(arquivo.FileName);
+            string novoNome = $"{codigoCliente}_{nomeOriginal}_{Guid.NewGuid()}{extensao}";
+            string caminhoFinal = Path.Combine(pastaCliente, novoNome); 
         }
     }
 }
