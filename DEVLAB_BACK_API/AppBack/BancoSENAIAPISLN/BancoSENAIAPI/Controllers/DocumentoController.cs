@@ -1,12 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 namespace BancoSENAIAPI.Controllers
+    
 {
-    public class HomeController : Controller
+    [ApiController]
+    [Route("api/v1/[controller]")]
+    public class DocumentoController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        private readonly string _caminhoraiz = Path.Combine(Directory.GetCurrentDirectory() , "ClienteArquivos");
+
+        private static List<Models.documentometadados> _documentometadados = new List<Models.documentometadados>();
+
+        private static int _nextId = 1;
     }
 }
