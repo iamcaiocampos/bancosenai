@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BancoSENAIAPI.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BancoSENAIAPI.Controllers
     
@@ -50,6 +51,22 @@ namespace BancoSENAIAPI.Controllers
             _documentometadados.Add(documentometadados);
 
             return Ok(new { mensagem = "documento anexado com sucesso", arquivoSalvo = novoNome });
+
+            
         }
+
+        [HttpGet("listagem/{codigoCliente}")]
+        public async Task<IActionResult> ListarDocumentos([FromRoute] int codigoCliente)
+        {
+            var documentos = _documentometadados.Where(d => d.CodigoCliente == codigoCliente).ToList();
+
+            if (!documentos.Any())
+            {
+                return NotFound("Nenhum documento encontrado para este cliente.");
+            }
+
+            return Ok(documentos);
+        }
+
     }
 }
