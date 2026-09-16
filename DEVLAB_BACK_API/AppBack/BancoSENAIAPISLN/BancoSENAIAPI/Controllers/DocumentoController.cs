@@ -21,6 +21,7 @@ namespace BancoSENAIAPI.Controllers
             {
                 return BadRequest("Nenhum arquivo foi enviado");
             }
+            
 
             string pastaCliente = Path.Combine(_caminhoraiz, codigoCliente.ToString());
 
@@ -33,6 +34,12 @@ namespace BancoSENAIAPI.Controllers
             string nomeOriginal = Path.GetFileName(arquivo.FileName);
             string novoNome = $"{codigoCliente}_{nomeOriginal}_{Guid.NewGuid()}{extensao}";
             string caminhoFinal = Path.Combine(pastaCliente, novoNome);
+
+            if (extensao != ".pdf" && extensao != ".jpg" && extensao != ".png")
+            {
+
+                return BadRequest("Tipo de arquivo não aceito! use .pdf .jpg ou .png");
+            }
 
             using (var stream = new FileStream(caminhoFinal, FileMode.Create))
             {
