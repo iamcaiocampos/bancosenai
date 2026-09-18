@@ -54,8 +54,8 @@ async function ListarDocumentos() {
                 <td>${a.name}</td>
                 <td>${a.extensao}</td>
                 <td>
-                    <button class="btn-editar" onclick="prepararEdicao(${a.id}, '${a.name}', '${a.extensao}')">Editar</button>
-                    <button class="btn-excluir" onclick="excluirAgencia(${a.id})">Excluir</button>
+                    <button class="btn-editar" onclick="download(${a.id}, '${a.name}', '${a.extensao}')">Editar</button>
+                    <button class="btn-excluir" onclick="excluirAgencia(${a.id}, '${a.name}', '${codigoCliente}')">Excluir</button>
                 </td>
             </tr>`;
         });
@@ -63,5 +63,19 @@ async function ListarDocumentos() {
     } else {
         const erro = await lista.text();
         alert("Erro: " + (erro) || "Falha ao enviar o documento.")
+    }
+
+    
+}
+
+async function download(identification, nome, extension) {
+
+}
+
+async function excluirAgencia(idee, nomee, codcliente) {
+
+    if (confirm(`Deseja realmente excluir o arquivo ${nomee}?`)) {
+        const response = await fetch(`${URL_API}/cliente/${codcliente}/excluir/${idee}`, { method: 'DELETE' });
+        
     }
 }
