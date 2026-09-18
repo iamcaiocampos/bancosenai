@@ -13,12 +13,12 @@ async function enviarDocumento() {
     const dadosArquivo = new FormData();
     dadosArquivo.append("arquivo", arquivo);
 
-    fetch(`${URL_API}/upload/${codigoCliente}`, {
+    const resposta = await fetch(`${URL_API}/upload/${codigoCliente}`, {
         method: "POST",
         body: dadosArquivo
     });
 
-    if (Response.ok) {
+    if (resposta.ok) {
         alert("Documento enviado com sucesso!");
         document.getElementById("codigoCliente").value = "";
         document.getElementById("arquivo").value = "";
