@@ -27,3 +27,41 @@ async function enviarDocumento() {
         alert("Erro: " + (erro.message) || "Falha ao enviar o documento.")
     }
 }
+
+async function ListarDocumentos() {
+    const codigoCliente = document.getElementById("CodigoCliente").value;
+
+    if (!codigoCliente) {
+        alert("Informe o código do cliente")
+        return;
+    }
+
+    const lista = await fetch(`${URL_API}/listagem/${codigoCliente}`, {
+        method: "GET",
+        
+    });
+
+    if (lista.ok) {
+        alert("Listado com sucesso!");
+        const corpo = document.getElementById("corpoTabela");
+        corpo.innerHTML = '';
+        const listalistavel = await lista.json();
+
+        listalistavel.forEach(a => {
+            corpo.innerHTML += `
+            <tr>
+                <td>${a.id}</td>
+                <td>${a.name}</td>
+                <td>${a.extensao}</td>
+                <td>
+                    <button class="btn-editar" onclick="prepararEdicao(${a.id}, '${a.name}', '${a.extensao}')">Editar</button>
+                    <button class="btn-excluir" onclick="excluirAgencia(${a.id})">Excluir</button>
+                </td>
+            </tr>`;
+        });
+
+    } else {
+        const erro = await lista.text();
+        alert("Erro: " + (erro) || "Falha ao enviar o documento.")
+    }
+}
