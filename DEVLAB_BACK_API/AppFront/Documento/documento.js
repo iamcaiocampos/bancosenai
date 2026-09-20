@@ -54,7 +54,7 @@ async function ListarDocumentos() {
                 <td>${a.name}</td>
                 <td>${a.extensao}</td>
                 <td>
-                    <button class="btn-editar" onclick="download(${a.id}, '${a.name}', '${a.extensao}')">Editar</button>
+                    <button class="btn-download" onclick="download(${a.id}, '${a.name}', '${codigoCliente}')">Download</button>
                     <button class="btn-excluir" onclick="excluirAgencia(${a.id}, '${a.name}', '${codigoCliente}')">Excluir</button>
                 </td>
             </tr>`;
@@ -68,9 +68,18 @@ async function ListarDocumentos() {
     
 }
 
-async function download(identification, nome, extension) {
-
+function download(identification, nome, codcliente) {
+    window.location.href =
+        `${URL_API}/cliente/${codcliente}/download/${identification}`;
 }
+
+//^^ esse código funciona bem fácil, pelo o que eu entendi, ele diz para o seu navegador navegar até o
+//`${URL_API}/cliente/${codcliente}/download/${identification}`;
+//e o seu navegador faz uma request HTTP para o backend
+//o back end responde e o browser sabe que é para fazer o download
+//bem legal e simples em?
+//mas não tem como pegar o objeto resposta, então se der algum 4xx não tem como fazer uma mensagem de erro
+// então é uma faca de dois gomes, gumes? sei lá :P
 
 async function excluirAgencia(idee, nomee, codcliente) {
 
