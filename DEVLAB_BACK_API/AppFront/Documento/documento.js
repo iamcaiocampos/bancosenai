@@ -20,8 +20,10 @@ async function enviarDocumento() {
 
     if (resposta.ok) {
         alert("Documento enviado com sucesso!");
-        document.getElementById("codigoCliente").value = "";
+        ListarDocumentos();
+        document.getElementById("CodigoCliente").value = "";
         document.getElementById("arquivo").value = "";
+        
     } else {
         const erro = await response.json();
         alert("Erro: " + (erro.message) || "Falha ao enviar o documento.")
@@ -61,7 +63,7 @@ async function ListarDocumentos() {
         });
 
     } else {
-        const erro = await lista.text();
+        const erro = await lista.text();    
         alert("Erro: " + (erro) || "Falha ao enviar o documento.")
     }
 
