@@ -1,6 +1,7 @@
 ﻿using BancoSENAIAPI.Data;
 using BancoSENAIAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BancoSENAIAPI.Controllers
     
@@ -82,7 +83,7 @@ namespace BancoSENAIAPI.Controllers
         [HttpGet("listagem/{codigoCliente}")]
         public async Task<IActionResult> ListarDocumentos([FromRoute] int codigoCliente)
         {
-            var documentos = _documentometadados.Where(d => d.CodigoCliente == codigoCliente).ToList();
+            var documentos = await _context.documentometadados.ToListAsync(); ;
 
             if (!documentos.Any())
             {
@@ -118,8 +119,8 @@ namespace BancoSENAIAPI.Controllers
         [FromRoute] int codigoCliente,
         [FromRoute] int id)
         {
-            var documento = _documentometadados
-                .FirstOrDefault(d => d.Id == id && d.CodigoCliente == codigoCliente);
+            var documento = await _context.documentometadados.FirstOrDefaultAsync(a => a.CodigoCliente == id);
+
 
             if (documento == null)
             {
@@ -132,7 +133,7 @@ namespace BancoSENAIAPI.Controllers
             {
                 System.IO.File.Delete(documento.Caminho);
             }
-
+            await _context.SaveChangesAsync();
             return NoContent();
         }
 
