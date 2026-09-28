@@ -1,4 +1,5 @@
-﻿using BancoSENAIAPI.Models;
+﻿using BancoSENAIAPI.Data;
+using BancoSENAIAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BancoSENAIAPI.Controllers
@@ -8,6 +9,13 @@ namespace BancoSENAIAPI.Controllers
     [Route("api/v1/[controller]")]
     public class DocumentoController : Controller
     {
+
+        private readonly AppDbContext _context;
+        public DocumentoController(AppDbContext context)
+        {
+            _context = context;
+        }
+
         private readonly string _caminhoraiz = Path.Combine(Directory.GetCurrentDirectory() , "ClienteArquivos");
 
         private static List<Models.documentometadados> _documentometadados = new List<Models.documentometadados>();
