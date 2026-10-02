@@ -1,7 +1,10 @@
-﻿namespace BancoSENAIAPI.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BancoSENAIAPI.Models
 {
     public class Cliente
     {
+        [Key]
         public int CodigoCliente { get; set; }
 
         public string NomeCliente { get; set; }
@@ -10,7 +13,7 @@
 
         public int NumeroAgencia { get; set; }
 
-        public decimal SaldoTotal { get; set; }
+        public decimal SaldoTotal { get; set; } 
 
         public string Sexo { get; set; }
 
