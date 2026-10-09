@@ -5,7 +5,7 @@ namespace BancoSENAIAPI.Dtos
     public class RegisterRequest
     {
         [Required]
-        public required string NomeUsuario { get; set; };
+        public required string NomeUsuario { get; set; }
         [Required]
 
         [MinLength(6)]
